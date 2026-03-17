@@ -1,0 +1,43 @@
+dataset:
+  name: fma_small
+  data_dir: data/fma_small
+  metadata_dir: data/fma_metadata
+  sample_rate: 22050
+  duration: 30
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+
+features:
+  n_mels: 128
+  n_mfcc: 20
+  n_fft: 2048
+  hop_length: 512
+  fmax: 8000
+  feature_type: mel_spectrogram
+
+model:
+  architecture: crnn
+  num_classes: 8
+  dropout: 0.3
+  hidden_size: 256
+  embedding_dim: 128
+
+training:
+  batch_size: 32
+  num_epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  scheduler: cosine
+  patience: 10
+  checkpoint_dir: checkpoints
+  log_dir: logs
+
+evaluation:
+  threshold: 0.5
+  top_k: 5
+
+inference:
+  index_path: embeddings/faiss_index.bin
+  embeddings_path: embeddings/track_embeddings.npy
+  metadata_path: embeddings/track_metadata.csv
