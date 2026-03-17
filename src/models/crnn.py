@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 
 class CRNNModel(nn.Module):
-    """CNN + LSTM for temporal audio modeling."""
+    """CNN + GRU for temporal audio modeling."""
 
     def __init__(
         self,

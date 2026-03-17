@@ -57,7 +57,8 @@ class Trainer:
             logits = self.model(features)
             loss = self.criterion(logits, labels)
             loss.backward()
-            nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
+            clip_val = self.config.get("grad_clip", 1.0)
+            nn.utils.clip_grad_norm_(self.model.parameters(), clip_val)
             self.optimizer.step()
             total_loss += loss.item()
 
